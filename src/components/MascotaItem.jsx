@@ -1,8 +1,5 @@
 import React, { useState } from "react";
-function MascotaItem({ mascota, clientes, onEliminar, onGuardar }) {
-  // Find the client name for this pet's clienteId
-  const cliente = clientes.find((c) => c.id === mascota.clienteId);
-  const clienteNombre = cliente ? cliente.nombre : "Cliente no encontrado";
+function MascotaItem({ mascota, onEliminar, onGuardar }) {
 
   const [edicion, setEdicion] = useState(false);
   const [nombreEditado, setNombreEditado] = useState(mascota.nombre);
@@ -78,9 +75,6 @@ function MascotaItem({ mascota, clientes, onEliminar, onGuardar }) {
           </p>
           <p>
             <strong>Edad:</strong> {mascota.edad} años
-          </p>
-          <p>
-            <strong>Cliente:</strong> {clienteNombre}
           </p>
           <button onClick={manejadorEliminar}>Eliminar</button>
           <button onClick={manejadorEditar}>Editar</button>

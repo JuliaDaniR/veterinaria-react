@@ -1,11 +1,10 @@
 import { useState } from "react";
 
-function FormularioMascota({ onMascotaAgregada, clientes }) {
+function FormularioMascota({ onMascotaAgregada }) {
   const [nombre, setNombre] = useState("");
   const [especie, setEspecie] = useState("");
   const [raza, setRaza] = useState("");
   const [edad, setEdad] = useState("");
-  const [clienteId, setClienteId] = useState("");
 
   const manejadorNombre = (e) => {
     setNombre(e.target.value);
@@ -19,12 +18,9 @@ function FormularioMascota({ onMascotaAgregada, clientes }) {
   const manejadorEdad = (e) => {
     setEdad(e.target.value);
   }
-  const manejadorCliente = (e) => {
-    setClienteId(e.target.value);
-  } 
   const manejadorEnvio = (e) => {
     e.preventDefault();
-    if (nombre.trim() === "" || especie.trim() === "" || raza.trim() === "" || edad.trim() === "" || clienteId.trim() === "") {
+    if (nombre.trim() === "" || especie.trim() === "" || raza.trim() === "" || edad.trim() === "") {
       alert("Por favor, completa todos los campos.");
       return;
     } 
@@ -33,8 +29,7 @@ function FormularioMascota({ onMascotaAgregada, clientes }) {
       nombre: nombre,
       especie: especie,
       raza: raza,
-      edad: parseInt(edad),
-      clienteId: parseInt(clienteId),
+      edad: parseInt(edad)
     };
     console.log("Nueva mascota registrada:", nuevaMascota); 
     onMascotaAgregada(nuevaMascota);
@@ -42,7 +37,6 @@ function FormularioMascota({ onMascotaAgregada, clientes }) {
     setEspecie("");
     setRaza("");
     setEdad("");
-    setClienteId("");
   };
 
   return (
@@ -63,17 +57,6 @@ function FormularioMascota({ onMascotaAgregada, clientes }) {
       <div className="form-group">
         <label>Edad:</label>
         <input type="number" value={edad} onChange={manejadorEdad} required />
-      </div>
-      <div className="form-group">
-        <label>Cliente:</label>
-        <select value={clienteId} onChange={manejadorCliente} required>
-          <option value="">Selecciona un cliente</option>
-          {clientes.map((cliente) => (
-            <option key={cliente.id} value={cliente.id}>
-              {cliente.nombre}
-            </option>
-          ))}
-        </select>
       </div>
       <button type="submit" className="button">Registrar Mascota</button>
     </form>
